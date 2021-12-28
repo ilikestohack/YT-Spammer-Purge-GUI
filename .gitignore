@@ -130,3 +130,6 @@ Spam_*.rtf
 
 # Ignore user-generated config file
 SpamPurgeConfig.ini
+
+# Ignore np++ bak file
+*.bak
