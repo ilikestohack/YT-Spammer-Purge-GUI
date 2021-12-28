@@ -90,7 +90,7 @@ from google.auth.transport.requests import Request
 # Authorize the request and store authorization credentials.
 def get_authenticated_service():
   global TOKEN_FILE_NAME
-  TOKEN_FILE_NAME = '..\token.pickle'
+  TOKEN_FILE_NAME = 'token.pickle'
   CLIENT_SECRETS_FILE = '..\client_secrets.json'
   YOUTUBE_READ_WRITE_SSL_SCOPE = ['https://www.googleapis.com/auth/youtube.force-ssl']
   API_SERVICE_NAME = 'youtube'
@@ -1870,7 +1870,6 @@ def prepare_filter_mode_smart(currentUser, scanMode, config, miscData, sensitive
       print(f" > {F.LIGHTRED_EX}NOTE:{S.R} This mode prioritizes a {F.LIGHTGREEN_EX}VERY low false positive rate{S.R}, at the cost of occasionally missing some spammers.\n")
     elif sensitive == True:
       print(f" > {F.LIGHTRED_EX}NOTE:{S.R} In sensitive mode, {F.LIGHTRED_EX}expect more false positives{S.R}. Recommended to run this AFTER regular Auto Smart Mode.\n")
-    input("Press Enter to Begin Scanning...")
 
   # General Spammer Criteria
   #usernameRedChars =""
@@ -2141,12 +2140,8 @@ def main():
     # Get channel ID and title of current user, confirm with user
     currentUser = get_current_user(config) # Returns [channelID, channelTitle]
     print("\n    >  Currently logged in user: " + f"{F.LIGHTGREEN_EX}" + str(currentUser[1]) + f"{S.R} (Channel ID: {F.LIGHTGREEN_EX}" + str(currentUser[0]) + f"{S.R} )")
-    if choice("       Continue as this user?", currentUser[2]) == True:
-      check_channel_id = currentUser[0]
-      confirmedCorrectLogin = True
-    else:
-      os.remove(TOKEN_FILE_NAME)
-      youtube = get_authenticated_service()
+    check_channel_id = currentUser[0]
+    confirmedCorrectLogin = True
   
   # User selects scanning mode,  while Loop to get scanning mode, so if invalid input, it will keep asking until valid input
   print(f"\n---------- {F.YELLOW}Scanning Options{S.R} --------------------------------------")
